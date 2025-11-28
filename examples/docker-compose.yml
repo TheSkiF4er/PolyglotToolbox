@@ -1,1 +1,18 @@
+version: '3.8'
 
+services:
+  core:
+    build: ./core
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./plugins:/app/plugins
+
+  ui:
+    build: ./ui
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+
+# Optional: add more services for language-specific environments or databases if needed
