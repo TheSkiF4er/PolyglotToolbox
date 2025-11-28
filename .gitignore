@@ -1,1 +1,62 @@
+# Polyglot Toolbox .gitignore
 
+# Node.js / JavaScript
+node_modules/
+npm-debug.log
+yarn-error.log
+/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+env/
+venv/
+*.egg-info/
+
+# PHP
+vendor/
+composer.lock
+
+# Go
+/bin/
+/pkg/
+*.exe
+*.out
+*.test
+
+# Java / Kotlin
+*.class
+*.jar
+*.war
+*.iml
+/build/
+/out/
+
+# C / C++ / C#
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.pdb
+/build/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+*.env
+docker-compose.override.yml
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
+Thumbs.db
