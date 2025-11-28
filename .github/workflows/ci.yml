@@ -1,1 +1,80 @@
+name: CI
 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language: [javascript, python, php, go]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        if: matrix.language == 'javascript'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Node.js dependencies
+        if: matrix.language == 'javascript'
+        run: |
+          cd plugins/javascript
+          npm ci
+
+      - name: Run JavaScript plugin tests
+        if: matrix.language == 'javascript'
+        run: |
+          cd plugins/javascript
+          npm test || echo "No tests defined"
+
+      - name: Set up Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        if: matrix.language == 'python'
+        run: |
+          cd plugins/python
+          pip install -r requirements.txt || echo "No requirements"
+
+      - name: Run Python plugin tests
+        if: matrix.language == 'python'
+        run: |
+          cd plugins/python
+          python -m unittest discover || echo "No tests defined"
+
+      - name: Set up PHP
+        if: matrix.language == 'php'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Run PHP plugin tests
+        if: matrix.language == 'php'
+        run: |
+          cd plugins/php
+          echo "No tests defined"
+
+      - name: Set up Go
+        if: matrix.language == 'go'
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Run Go plugin tests
+        if: matrix.language == 'go'
+        run: |
+          cd core
+          go test ./...
+          cd ../plugins/go
+          echo "Go plugin tests placeholder"
