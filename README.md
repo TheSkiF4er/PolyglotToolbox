@@ -1,80 +1,112 @@
 # Polyglot Toolbox
 
-A learning + comparison repository: the same tiny "text statistics" microservice & CLI implemented in 11 languages:
-C, C++, C#, Java, PHP, JavaScript (Node), Python, TypeScript, Go, Ruby, Kotlin.
+**Polyglot Toolbox** is an open-source project demonstrating multi-language implementations and interoperability examples across various programming languages.
 
-Why this project exists
-- Learn idiomatic patterns across languages.
-- Compare performance, packaging and testing approaches.
-- Contribute a language implementation, example, or improvement.
+[![Languages](https://img.shields.io/badge/languages-C%2B%2B%2C%20C%2C%20C%23%2C%20Java%2C%20Kotlin%2C%20Go%2C%20PHP%2C%20JavaScript%2C%20TypeScript%2C%20Python%2C%20Ruby-blue)](https://github.com/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/username/PolyglotToolbox)](https://github.com/username/PolyglotToolbox/graphs/contributors)
 
-Quick start (Node version)
+---
+
+## 🚀 Features
+
+- Multi-language implementations for CLI, web, and API examples
+- Interoperability examples between languages
+- Simple benchmarks for performance comparison
+- Quick-start examples via Docker and cURL
+- CI workflow for automated testing
+
+## 🛠 Supported Languages
+
+- C, C++, C#, Java, Kotlin, Go, PHP, JavaScript, TypeScript, Python, Ruby
+
+## 📦 Project Structure
+
+```
+polyglot-toolbox/
+├─ .github/
+│  ├─ workflows/ci.yml
+│  ├─ ISSUE_TEMPLATE.md
+│  └─ PULL_REQUEST_TEMPLATE.md
+├─ LICENSE
+├─ README.md
+├─ CONTRIBUTING.md
+├─ CODE_OF_CONDUCT.md
+├─ examples/
+│  ├─ curl_examples.md
+│  └─ docker-compose.yml
+├─ benchmarks/
+│  └─ run_benchmarks.sh
+├─ templates/
+│  └─ module_template.md
+├─ languages/
+│  ├─ c/
+│  │  ├─ README.md
+│  │  └─ textstats.c
+│  ├─ cpp/
+│  │  ├─ README.md
+│  │  └─ textstats.cpp
+│  ├─ csharp/
+│  │  ├─ README.md
+│  │  ├─ PolyServe.csproj
+│  │  └─ Program.cs
+│  ├─ java/
+│  │  ├─ README.md
+│  │  ├─ pom.xml
+│  │  └─ src/...
+│  ├─ php/
+│  │  ├─ README.md
+│  │  └─ public/index.php
+│  ├─ javascript/
+│  │  ├─ README.md
+│  │  └─ src/index.js
+│  ├─ python/
+│  │  ├─ README.md
+│  │  └─ app.py
+│  ├─ typescript/
+│  │  ├─ README.md
+│  │  └─ src/index.ts
+│  ├─ go/
+│  │  ├─ README.md
+│  │  └─ main.go
+│  ├─ ruby/
+│  │  ├─ README.md
+│  │  └─ app.rb
+│  └─ kotlin/
+│     ├─ README.md
+│     └─ build.gradle.kts
+└─ .gitignore
+```
+
+## ⚡ Quick Start
+
+### Run via Docker Compose
 ```bash
-cd languages/javascript
-npm install
-npm start
-# then:
-curl -X POST localhost:3000/stats -H "Content-Type: application/json" -d '{"text":"hello hello world"}'
+docker-compose -f examples/docker-compose.yml up --build
 ```
 
-Contributing
-* See CONTRIBUTING.md for how to add a new language or improve an impl.
-* We welcome docs, tests, benchmarks, examples and optimizations.
+### Run Benchmark
+```bash
+bash benchmarks/run_benchmarks.sh
+```
+
+### Run Example Plugin via cURL
+```bash
+curl -X POST http://localhost:8080/run-plugin \
+  -H "Content-Type: application/json" \
+  -d '{"plugin":"python","input":{"message":"Hello World"}}'
+```
+
+## 📄 Contributing
+
+- Use `templates/module_template.md` for creating new modules
+- Follow `.github/PULL_REQUEST_TEMPLATE.md` for PR submissions
+- Use `.github/ISSUE_TEMPLATE.md` when reporting issues
+
+## 📜 License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
 
 ---
 
----
-
-### .github/workflows/ci.yml (GitHub Actions — matrix across a few languages)
-```yaml
-name: CI
-
-on: [push, pull_request]
-
-jobs:
-  build-test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        lang: [javascript, python, go, csharp, java, php, ruby, typescript]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Node
-        if: matrix.lang == 'javascript' || matrix.lang == 'typescript'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Set up Python
-        if: matrix.lang == 'python'
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-
-      - name: Set up Go
-        if: matrix.lang == 'go'
-        uses: actions/setup-go@v4
-        with:
-          go-version: 1.20
-
-      - name: Set up .NET
-        if: matrix.lang == 'csharp'
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0
-
-      - name: Run language tests
-        run: |
-          case "${{ matrix.lang }}" in
-            javascript) cd languages/javascript && npm ci && npm test;;
-            typescript) cd languages/typescript && npm ci && npm test;;
-            python) cd languages/python && python -m pip install -r requirements.txt && pytest -q;;
-            go) cd languages/go && go test ./...;;
-            csharp) cd languages/csharp && dotnet test;;
-            java) cd languages/java && mvn -q test;;
-            php) cd languages/php && composer install && vendor/bin/phpunit -q || true;;
-            ruby) cd languages/ruby && bundle install && rake test || true;;
-            *) echo "No tests configured";;
-          esac
-```
+Thank you for exploring **Polyglot Toolbox**! Your contributions and feedback are welcome.
