@@ -3,7 +3,7 @@
 **Polyglot Toolbox** is an open-source project demonstrating multi-language implementations and interoperability examples across various programming languages.
 
 [![Languages](https://img.shields.io/badge/languages-C%2B%2B%2C%20C%2C%20C%23%2C%20Java%2C%20Kotlin%2C%20Go%2C%20PHP%2C%20JavaScript%2C%20TypeScript%2C%20Python%2C%20Ruby-blue)](https://github.com/)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT%20License-green)](LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/TheSkiF4er/PolyglotToolbox)](https://github.com/TheSkiF4er/PolyglotToolbox/graphs/contributors)
 
 ---
